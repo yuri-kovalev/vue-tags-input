@@ -35,10 +35,10 @@
     "*.vue": "eslint"
   },
   "peerDependencies": {
-    "vue": "2.x"
+    "vue": "3.x"
   },
   "dependencies": {
-    "vue": "^2.6.10"
+    "vue": "^3.0.0-beta.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -46,6 +46,7 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@hydrant/eslint-config": "^2.0.1",
+    "@vue/compiler-sfc": "^3.0.11",
     "autoprefixer": "^9.4.3",
     "axios": "^0.21.1",
     "babel-eslint": "^10.0.1",
@@ -54,7 +55,7 @@
     "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.1.4",
     "css-loader": "^2.0.2",
-    "documentation": "^9.1.1",
+    "documentation": "^13.2.4",
     "eslint": "^5.10.0",
     "eslint-plugin-vue": "^5.0.0-beta.3",
     "fast-deep-equal": "^2.0.1",
@@ -73,10 +74,10 @@
     "testcafe": "^0.23.3",
     "testcafe-vue-selectors": "^3.0.0",
     "url-loader": "^1.1.2",
-    "vue-loader": "^15.4.2",
-    "vue-router": "^3.0.1",
+    "vue-cli-plugin-vue-next": "~0.1.4",
+    "vue-loader": "^16.2.0",
+    "vue-router": "^4.0.6",
     "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.10",
     "webpack": "^4.28.1",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
