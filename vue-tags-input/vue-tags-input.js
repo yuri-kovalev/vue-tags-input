@@ -345,11 +345,6 @@ export default {
     tagsEqual() {
       return !this.tagsCopy.some((t, i) => !equal(t, this.tags[i]));
     },
-    updateNewTag(ievent) {
-      const value = ievent.target.value;
-      this.newTag = value;
-      this.$emit('input', value);
-    },
     initTags() {
       // We always work with a copy of the "real" tags, to easier edit them
       this.tagsCopy = createTags(this.tags, this.validation, this.isDuplicate);
