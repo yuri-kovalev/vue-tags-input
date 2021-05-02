@@ -110,7 +110,7 @@ export default {
     // Toggles the edit mode for a tag
     toggleEditMode(index) {
       if (!this.allowEditTags || this.disabled) return;
-      this.$set(this.tagsEditStatus, index, !this.tagsEditStatus[index]);
+      this.tagsEditStatus[index] = !this.tagsEditStatus[index];
     },
     // only called by the @input event from TagInput.
     // Creates a new tag model and applys it to this.tagsCopy[index]
@@ -121,9 +121,8 @@ export default {
       // yes, this sucks ...
       const tag = this.tagsCopy[index];
       tag.text = event ? event.target.value : this.tagsCopy[index].text;
-      this.$set(this.tagsCopy, index,
-        createTag(tag, this.tagsCopy, this.validation, this.isDuplicate)
-      );
+      this.tagsCopy[index] =
+        createTag(tag, this.tagsCopy, this.validation, this.isDuplicate);
     },
     // Focuses the input of a tag
     focus(index) {
@@ -141,7 +140,7 @@ export default {
       this.tagsCopy[index] = clone(
         createTag(this.tags[index], this.tags, this.validation, this.isDuplicate)
       );
-      this.$set(this.tagsEditStatus, index, false);
+      this.tagsEditStatus[index] = false;
     },
     hasForbiddingAddRule(tiClasses) {
       // Does the tag has a rule, defined by the user, which prohibits adding?
@@ -327,7 +326,7 @@ export default {
       if (this.hasForbiddingAddRule(tag.tiClasses)) return;
 
       // Everything is okay → save the tag
-      this.$set(this.tagsCopy, index, tag);
+      this.tagsCopy[index] = tag;
       this.toggleEditMode(index);
 
       // Special update for the parent if .sync is on
