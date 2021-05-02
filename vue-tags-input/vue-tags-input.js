@@ -404,7 +404,7 @@ export default {
   beforeUpdate() {
     this.tagCenter = [];
   },
-  destroyed() {
+  unmounted() {
     document.removeEventListener('click', this.blurredOnClick);
   },
 };
