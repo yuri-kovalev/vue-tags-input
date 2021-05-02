@@ -6,7 +6,8 @@
 <template>
   <div
     class="vue-tags-input"
-    :class="[{ 'ti-disabled': disabled }, { 'ti-focus': focused }]"
+    :class="[{ 'ti-disabled': disabled }, { 'ti-focus': focused }, $attrs.class]"
+    :style="$attrs.style"
   >
     <div class="ti-input">
       <ul v-if="tagsCopy" class="ti-tags">

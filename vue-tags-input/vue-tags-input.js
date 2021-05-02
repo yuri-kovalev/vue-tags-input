@@ -11,6 +11,7 @@ export default {
   name: 'VueTagsInput',
   components: { TagInput },
   props,
+  inheritAttrs: false,
   data() {
     return {
       tagCenter: [],
