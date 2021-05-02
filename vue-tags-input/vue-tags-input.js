@@ -13,6 +13,7 @@ export default {
   props,
   data() {
     return {
+      tagCenter: [],
       newTag: null,
       tagsCopy: null,
       tagsEditStatus: null,
@@ -68,6 +69,12 @@ export default {
     },
     isMarked(index) {
       return this.deletionMark === index;
+    },
+    // Save ref for tag
+    setTagCenter(el) {
+      if (el) {
+        this.tagCenter.push(el);
+      }
     },
     // Method which is called when the user presses backspace → remove the last tag
     invokeDelete() {
@@ -127,7 +134,7 @@ export default {
     // Focuses the input of a tag
     focus(index) {
       this.$nextTick(() => {
-        const el = this.$refs.tagCenter[index].querySelector('input.ti-tag-input');
+        const el = this.tagCenter[index].querySelector('input.ti-tag-input');
         if (el) el.focus();
       });
     },
@@ -393,6 +400,9 @@ export default {
 
     // We add a event listener to hide autocomplete on blur
     document.addEventListener('click', this.blurredOnClick);
+  },
+  beforeUpdate() {
+    this.tagCenter = [];
   },
   destroyed() {
     document.removeEventListener('click', this.blurredOnClick);

@@ -41,7 +41,7 @@
                 :deletion-mark="isMarked(index)"
               />
             </div>
-            <div ref="tagCenter" class="ti-tag-center">
+            <div :ref="setTagCenter" class="ti-tag-center">
               <span
                 v-if="!$slots['tag-center']"
                 :class="{ 'ti-hidden': tagsEditStatus[index] }"
