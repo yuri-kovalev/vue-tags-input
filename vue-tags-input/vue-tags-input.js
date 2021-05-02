@@ -11,6 +11,19 @@ export default {
   name: 'VueTagsInput',
   components: { TagInput },
   props,
+  emits: [
+    'adding-duplicate',
+    'before-adding-tag',
+    'before-deleting-tag',
+    'before-editing-tag',
+    'before-saving-tag',
+    'max-tags-reached',
+    'saving-duplicate',
+    'tags-changed',
+    'tag-clicked',
+    'update:modelValue',
+    'update:tags'
+  ],
   inheritAttrs: false,
   data() {
     return {
@@ -94,7 +107,7 @@ export default {
     // Method to call if a tag should switch to it's edit mode
     performEditTag(index) {
       if (!this.allowEditTags) return;
-      if (!this._events['before-editing-tag']) this.editTag(index);
+      if (!this.onBeforeAddingTag) this.editTag(index);
       /**
        * @description Emits before a tag toggles to it's edit mode
        * @name before-editing-tag
@@ -164,7 +177,7 @@ export default {
     },
     // Method to call to delete a tag
     performDeleteTag(index) {
-      if (!this._events['before-deleting-tag']) this.deleteTag(index);
+      if (!this.onBeforeDeletingTag) this.deleteTag(index);
       /**
        * @description Emits before a tag is deleted
        * @name before-deleting-tag
@@ -187,7 +200,7 @@ export default {
       this.tagsCopy.splice(index, 1);
 
       // Special update for the parent if v-model:tags is on
-      if (this._events['update:tags']) this.$emit('update:tags', this.tagsCopy);
+      this.$emit('update:tags', this.tagsCopy);
 
       /**
        * @description Emits if the tags array changes
@@ -220,7 +233,7 @@ export default {
       // The basic checks are done → try to add all tags
       tags.forEach(tag => {
         tag = createTag(tag, this.tags, this.validation, this.isDuplicate);
-        if (!this._events['before-adding-tag']) this.addTag(tag, source);
+        if (!this.onBeforeAddingTag) this.addTag(tag, source);
         /**
          * @description Emits before a tag is added
          * @name before-adding-tag
@@ -274,11 +287,11 @@ export default {
         if (this.hasForbiddingAddRule(tag.tiClasses)) return;
 
         // Everything is okay → add the tag
-        this.$emit('input', '');
+        this.newTag = ''
         this.tagsCopy.push(tag);
 
-        // Special update for the parent if .sync is on
-        if (this._events['update:tags']) this.$emit('update:tags', this.tagsCopy);
+        // Special update for the parent if v-model:tags is on
+        this.$emit('update:tags', this.tagsCopy);
 
         // if the tag was added by autocomplete, focus the input
         if (source === 'autocomplete') this.$refs.newTagInput.focus();
@@ -297,7 +310,7 @@ export default {
       if (tag.text.trim().length === 0) return;
 
       // The basic checks are done → try to save the tag
-      if (!this._events['before-saving-tag']) this.saveTag(index, tag);
+      if (!this['on-before-saving-tag']) this.saveTag(index, tag);
       /**
        * @description Emits before a tag is saved
        * @name before-saving-tag
@@ -338,7 +351,7 @@ export default {
       this.toggleEditMode(index);
 
       // Special update for the parent if v-model:tags is on
-      if (this._events['update:tags']) this.$emit('update:tags', this.tagsCopy);
+      this.$emit('update:tags', this.tagsCopy);
 
       this.$emit('tags-changed', this.tagsCopy);
     },
@@ -354,7 +367,7 @@ export default {
 
       // We check if the original and the copied and validated tags are equal →
       // Update the parent if not and v-model:tags is on.
-      if (this._events['update:tags'] && !this.tagsEqual()) {
+      if (!this.tagsEqual()) {
         this.$emit('update:tags', this.tagsCopy);
       }
     },
@@ -372,7 +385,7 @@ export default {
     },
   },
   watch: {
-    value(newValue){
+    modelValue(newValue){
       // If v-model change outside, update the newTag model
       if (!this.addOnlyFromAutocomplete) this.selectedItem = null;
       this.newTag = newValue;
@@ -387,7 +400,7 @@ export default {
     autocompleteOpen: 'selectDefaultItem',
   },
   created() {
-    this.newTag = this.value;
+    this.newTag = this.modelValue;
     this.initTags();
   },
   mounted() {

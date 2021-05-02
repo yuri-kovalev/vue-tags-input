@@ -139,8 +139,7 @@
             @keydown.tab="performBlur"
             @keydown.up="selectItem($event, 'before')"
             @keydown.down="selectItem($event, 'after')"
-            @blur="$emit('blur', $event)"
-            @focus="focused = true; $emit('focus', $event)"
+            @focus="focused = true"
             @click="addOnlyFromAutocomplete ? false : selectedItem = null"
           >
         </li>
