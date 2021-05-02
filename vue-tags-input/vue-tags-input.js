@@ -186,7 +186,7 @@ export default {
       clearTimeout(this.deletionMarkTime);
       this.tagsCopy.splice(index, 1);
 
-      // Special update for the parent if .sync is on
+      // Special update for the parent if v-model:tags is on
       if (this._events['update:tags']) this.$emit('update:tags', this.tagsCopy);
 
       /**
@@ -337,7 +337,7 @@ export default {
       this.tagsCopy[index] = tag;
       this.toggleEditMode(index);
 
-      // Special update for the parent if .sync is on
+      // Special update for the parent if v-model:tags is on
       if (this._events['update:tags']) this.$emit('update:tags', this.tagsCopy);
 
       this.$emit('tags-changed', this.tagsCopy);
@@ -353,7 +353,7 @@ export default {
       this.tagsEditStatus = clone(this.tags).map(() => false);
 
       // We check if the original and the copied and validated tags are equal →
-      // Update the parent if not and sync is on.
+      // Update the parent if not and v-model:tags is on.
       if (this._events['update:tags'] && !this.tagsEqual()) {
         this.$emit('update:tags', this.tagsCopy);
       }
