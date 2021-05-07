@@ -1,14 +1,15 @@
 {
-  "name": "@johmun/vue-tags-input",
-  "version": "2.1.0",
+  "name": "@sipec/vue3-tags-input",
+  "version": "3.0.1",
   "author": "Johannes Munari <johannesm@hotmail.de>",
   "license": "MIT",
-  "description": "A tags input component for VueJS with autocompletion, custom validation, templating and much more",
+  "description": "A tags input component for Vue 3 with autocompletion, custom validation, templating and much more",
   "homepage": "http://www.vue-tags-input.com",
   "private": false,
   "keywords": [
     "javascript",
     "vue",
+    "vue3",
     "tags",
     "vue-tags-input",
     "vue-component",
@@ -16,7 +17,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/JohMun/vue-tags-input.git"
+    "url": "https://github.com/sipec/vue-tags-input.git"
   },
   "main": "dist/vue-tags-input.js",
   "scripts": {
@@ -34,6 +35,10 @@
     "*.js": "eslint",
     "*.vue": "eslint"
   },
+  "files": [
+    "dist/*",
+    "vue-tags-input/*"
+  ],
   "peerDependencies": {
     "vue": "3.x"
   },
