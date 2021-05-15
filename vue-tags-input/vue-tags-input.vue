@@ -123,9 +123,9 @@
           <input
             ref="newTagInput"
             v-bind="$attrs"
-            v-model="newTag"
             :class="[createClasses(newTag, tags, validation, isDuplicate)]"
             :placeholder="placeholder"
+            :value="newTag"
             :maxlength="maxlength"
             :disabled="disabled"
             type="text"
@@ -139,6 +139,7 @@
             @keydown.tab="performBlur"
             @keydown.up="selectItem($event, 'before')"
             @keydown.down="selectItem($event, 'after')"
+            @input="updateNewTag"
             @focus="focused = true"
             @click="addOnlyFromAutocomplete ? false : selectedItem = null"
           >
