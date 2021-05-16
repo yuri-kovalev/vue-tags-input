@@ -29,7 +29,7 @@ export default {
     return {
       tagCenter: [],
       newTag: null,
-      tagsCopy: null,
+      tagsCopy: [],
       tagsEditStatus: null,
       deletionMark: null,
       deletionMarkTime: null,
